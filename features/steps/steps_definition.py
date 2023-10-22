@@ -7,7 +7,7 @@ main_page = "https://www.saucedemo.com/"
 
 # =========================== LOGIN FUNCTIONALITY ==================================
 
-@given(u'the user is on the login page')
+@given(u'user is on the login page')
 def user_is_on_login_page(context):
     # context.driver.get('https://www.saucedemo.com/')
     SeleniumHelper().open_page(context.driver, main_page)
@@ -15,7 +15,7 @@ def user_is_on_login_page(context):
 
 
 
-@when('the user enters {username} and {password}')
+@when('user enters {username} and {password}')
 def user_enters_credentials(context, username, password):
     username_field = context.driver.find_element(By.ID, 'user-name')
     password_field = context.driver.find_element(By.ID, 'password')
@@ -25,7 +25,7 @@ def user_enters_credentials(context, username, password):
     login_button.click()
     sleep(2)
 
-@then('the user is {expected_result}')
+@then('user is {expected_result}')
 def user_check_result(context, expected_result):
     if expected_result == 'redirected to product page':
         assert context.driver.current_url == 'https://www.saucedemo.com/inventory.html'
@@ -40,7 +40,7 @@ def user_check_result(context, expected_result):
 
 # =========================== PRODUCT_SORT ==================================
 
-@given(u'the user is logged in')
+@given(u'user is logged in')
 def user_login(context):
     SeleniumHelper().open_page(context.driver, main_page)
     username = context.driver.find_element(By.ID, 'user-name')
@@ -51,7 +51,7 @@ def user_login(context):
     login_button.click()
     sleep(2)
 
-@when('the user selects Name Z to A option from the product sort')
+@when('user selects Name Z to A option from the product sort')
 def select_z_a(context):
     sort_button = context.driver.find_element(By.CLASS_NAME, 'product_sort_container')
     sort_button.click()
@@ -59,7 +59,7 @@ def select_z_a(context):
     sort_name = context.driver.find_element(By.XPATH, "//option[@value='za']")
     sort_name.click()
 
-@then('the products are sorted alphabetically from Z to A')
+@then('products are sorted alphabetically from Z to A')
 def verify_a_z(context):
     product_names = context.driver.find_elements(By.CLASS_NAME, 'inventory_item_name')
     assert product_names[0].text == 'Test.allTheThings() T-Shirt (Red)'

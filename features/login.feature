@@ -3,9 +3,9 @@ Feature: Testing Login Functionality
 @logincase
 @sanity
   Scenario Outline: User login with credentials
-    Given the user is on the login page
-    When the user enters <username> and <password>
-    Then the user is <expected_result>
+    Given user is on the login page
+    When user enters <username> and <password>
+    Then user is <expected_result>
 
     Examples:
       | username         | password        | expected_result         |
